@@ -1,5 +1,6 @@
 {
   "name": "matrix-backend",
+  "homepage": ".",
   "scripts": {
     "build": "babel ./app -d ./dist",
     "start-dev": "nodemon --exec babel-node --inspect ./app/index.js",
