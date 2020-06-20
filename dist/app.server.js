@@ -29,7 +29,7 @@ var _app2 = require("./app.config");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const app = (0, _express.default)();
-const PUBLIC_URL = process.env.PUBLIC_URL || "https://localhost:3003"; //app.use(morgan("tiny"));
+const PUBLIC_URL = process.env.PUBLIC_URL || "http://localhost:3000"; //app.use(morgan("tiny"));
 
 app.use((0, _cookieSession.default)((0, _app2.getSessionConfig)()));
 app.use(_bodyParser.default.urlencoded({

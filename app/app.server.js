@@ -44,11 +44,10 @@ app.use(
   })
 );
 
-app.use("/", express.static(path.join(__dirname, "..", "..", "dist")));
+app.use("/", express.static(path.join(__dirname, "..", "dist")));
 
 const assetsManifestFile = path.join(
   __dirname,
-  "..",
   "..",
   "dist",
   "manifest.json"
