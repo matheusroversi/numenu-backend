@@ -1,17 +1,14 @@
 import fs from "fs";
 import request from "request";
 
+import meData from "../file/menu.me.web";
+
 const fetchFromFile = () =>
   new Promise((resolve, reject) => {
     try {
-      const meData = fs.readFileSync(
-        fs.readFileSync(new URL(`file://file/menu.me.web.json`))
-      );
-      const meDetail = JSON.parse(meData);
-
-      resolve(meDetail);
+      resolve(meData);
     } catch (error) {
-      console.log('##', error)
+      console.log("##", error);
       reject(error);
     }
   });

@@ -1,13 +1,12 @@
 import fs from "fs";
 import request from "request";
 
+import categoriesData from "../file/menu.categories.web.js";
+
 const fetchFromFile = () =>
   new Promise((resolve, reject) => {
     try {
-      const categoriesData = fs.readFileSync(new URL(`file://file/menu.categories.web.json`));
-      const categoriesDetail = JSON.parse(categoriesData);
-
-      resolve(categoriesDetail);
+      resolve(categoriesData);
     } catch (error) {
       reject(error);
     }

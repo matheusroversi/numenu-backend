@@ -9,14 +9,13 @@ var _fs = _interopRequireDefault(require("fs"));
 
 var _request = _interopRequireDefault(require("request"));
 
+var _menuProducts = _interopRequireDefault(require("../file/menu.products.web"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const fetchFromFile = () => new Promise((resolve, reject) => {
   try {
-    const productsData = _fs.default.readFileSync(new URL(`file://file/menu.products.web.json`));
-
-    const productsDetail = JSON.parse(productsData);
-    resolve(productsDetail);
+    resolve(_menuProducts.default);
   } catch (error) {
     reject(error);
   }

@@ -1,32 +1,32 @@
 import fs from "fs";
 import request from "request";
 
-const fetchFromFile = () => new Promise((resolve, reject) => {
-  try {
+import productsData from "../file/menu.products.web";
 
-    const productsData = fs.readFileSync(new URL(`file://file/menu.products.web.json`));
-    const productsDetail = JSON.parse(productsData);
+const fetchFromFile = () =>
+  new Promise((resolve, reject) => {
+    try {
+      resolve(productsData);
+    } catch (error) {
+      reject(error);
+    }
+  });
 
-    resolve(productsDetail);
-  } catch (error) {
-    reject(error);
-  }
-});
-
-const fetchFromEnvironment = (env) => new Promise((resolve, reject) => {
-  try {
-    const productsData = env.products_DATA;
-    const productsDetail = JSON.parse(productsData);
-    resolve(productsDetail);
-  } catch (error) {
-    reject(error);
-  }
-});
+const fetchFromEnvironment = (env) =>
+  new Promise((resolve, reject) => {
+    try {
+      const productsData = env.products_DATA;
+      const productsDetail = JSON.parse(productsData);
+      resolve(productsDetail);
+    } catch (error) {
+      reject(error);
+    }
+  });
 
 const fetchFromRemote = (env) => {
   const url = env.products_DATA;
 
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     request(url, (error, response, body) => {
       // in addition to parsing the value, deal with possible errors
       if (error) return reject(error);
@@ -37,7 +37,7 @@ const fetchFromRemote = (env) => {
         reject(e);
       }
     });
-  }));
+  });
 };
 
 const fetchproducts = (strategy) => {

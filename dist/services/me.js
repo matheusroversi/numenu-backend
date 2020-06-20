@@ -9,16 +9,15 @@ var _fs = _interopRequireDefault(require("fs"));
 
 var _request = _interopRequireDefault(require("request"));
 
+var _menuMe = _interopRequireDefault(require("../file/menu.me.web"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const fetchFromFile = () => new Promise((resolve, reject) => {
   try {
-    const meData = _fs.default.readFileSync(_fs.default.readFileSync(new URL(`file://file/menu.me.web.json`)));
-
-    const meDetail = JSON.parse(meData);
-    resolve(meDetail);
+    resolve(_menuMe.default);
   } catch (error) {
-    console.log('##', error);
+    console.log("##", error);
     reject(error);
   }
 });
