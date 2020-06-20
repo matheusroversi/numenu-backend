@@ -4,7 +4,7 @@ import request from "request";
 const SERVER_ADDRESS =
   process.env.API_SERVER_ADDRESS || "http://localhost:8080";
 
-const roomFilePath = `${SERVER_ADDRESS}/file/menu.categories.web.json`;
+const roomFilePath = "./file/menu.categories.web.json";
 
 const fetchFromFile = () =>
   new Promise((resolve, reject) => {
