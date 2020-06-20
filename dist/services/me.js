@@ -11,15 +11,14 @@ var _request = _interopRequireDefault(require("request"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const meFilePath = "../file/menu.me.web.json";
-
 const fetchFromFile = () => new Promise((resolve, reject) => {
   try {
-    const meData = _fs.default.readFileSync(meFilePath);
+    const meData = _fs.default.readFileSync(_fs.default.readFileSync(new URL(`file://file/menu.me.web.json`)));
 
     const meDetail = JSON.parse(meData);
     resolve(meDetail);
   } catch (error) {
+    console.log('##', error);
     reject(error);
   }
 });

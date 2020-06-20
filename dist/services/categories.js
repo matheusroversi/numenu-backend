@@ -11,11 +11,9 @@ var _request = _interopRequireDefault(require("request"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const roomFilePath = "../../file/menu.categories.web.json";
-
 const fetchFromFile = () => new Promise((resolve, reject) => {
   try {
-    const categoriesData = _fs.default.readFileSync(roomFilePath);
+    const categoriesData = _fs.default.readFileSync(new URL(`file://file/menu.categories.web.json`));
 
     const categoriesDetail = JSON.parse(categoriesData);
     resolve(categoriesDetail);

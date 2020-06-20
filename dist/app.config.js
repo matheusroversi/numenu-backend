@@ -73,6 +73,7 @@ function getAllowedDomains() {
 function getServerConfig() {
   const host = "0.0.0.0";
   const port = process.env.PORT || 8080;
+  console.log("#####", process.env);
   return {
     host,
     port

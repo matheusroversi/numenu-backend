@@ -1,34 +1,36 @@
 import fs from "fs";
 import request from "request";
 
-const meFilePath = "../file/menu.me.web.json";
+const fetchFromFile = () =>
+  new Promise((resolve, reject) => {
+    try {
+      const meData = fs.readFileSync(
+        fs.readFileSync(new URL(`file://file/menu.me.web.json`))
+      );
+      const meDetail = JSON.parse(meData);
 
-const fetchFromFile = () => new Promise((resolve, reject) => {
-  try {
+      resolve(meDetail);
+    } catch (error) {
+      console.log('##', error)
+      reject(error);
+    }
+  });
 
-    const meData = fs.readFileSync(meFilePath);
-    const meDetail = JSON.parse(meData);
-
-    resolve(meDetail);
-  } catch (error) {
-    reject(error);
-  }
-});
-
-const fetchFromEnvironment = (env) => new Promise((resolve, reject) => {
-  try {
-    const meData = env.me_DATA;
-    const meDetail = JSON.parse(meData);
-    resolve(meDetail);
-  } catch (error) {
-    reject(error);
-  }
-});
+const fetchFromEnvironment = (env) =>
+  new Promise((resolve, reject) => {
+    try {
+      const meData = env.me_DATA;
+      const meDetail = JSON.parse(meData);
+      resolve(meDetail);
+    } catch (error) {
+      reject(error);
+    }
+  });
 
 const fetchFromRemote = (env) => {
   const url = env.me_DATA;
 
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     request(url, (error, response, body) => {
       // in addition to parsing the value, deal with possible errors
       if (error) return reject(error);
@@ -39,7 +41,7 @@ const fetchFromRemote = (env) => {
         reject(e);
       }
     });
-  }));
+  });
 };
 
 const fetchme = (strategy) => {

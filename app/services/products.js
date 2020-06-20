@@ -1,12 +1,10 @@
 import fs from "fs";
 import request from "request";
 
-const productsFilePath = "../file/menu.products.web.json";
-
 const fetchFromFile = () => new Promise((resolve, reject) => {
   try {
 
-    const productsData = fs.readFileSync(productsFilePath);
+    const productsData = fs.readFileSync(new URL(`file://file/menu.products.web.json`));
     const productsDetail = JSON.parse(productsData);
 
     resolve(productsDetail);

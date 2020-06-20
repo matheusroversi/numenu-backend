@@ -1,15 +1,10 @@
 import fs from "fs";
 import request from "request";
 
-const SERVER_ADDRESS =
-  process.env.API_SERVER_ADDRESS || "http://localhost:8080";
-
-const roomFilePath = "./file/menu.categories.web.json";
-
 const fetchFromFile = () =>
   new Promise((resolve, reject) => {
     try {
-      const categoriesData = fs.readFileSync(roomFilePath);
+      const categoriesData = fs.readFileSync(new URL(`file://file/menu.categories.web.json`));
       const categoriesDetail = JSON.parse(categoriesData);
 
       resolve(categoriesDetail);
