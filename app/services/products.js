@@ -1,7 +1,7 @@
 import fs from "fs";
 import request from "request";
 
-const productsFilePath = "../../file/menu.products.web.json";
+const productsFilePath = "../file/menu.products.web.json";
 
 const fetchFromFile = () => new Promise((resolve, reject) => {
   try {
