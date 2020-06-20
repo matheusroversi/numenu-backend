@@ -1,34 +1,38 @@
 import fs from "fs";
 import request from "request";
 
-const roomFilePath = "../file/menu.categories.web.json";
+const SERVER_ADDRESS =
+  process.env.API_SERVER_ADDRESS || "http://localhost:8080";
 
-const fetchFromFile = () => new Promise((resolve, reject) => {
-  try {
+const roomFilePath = `${SERVER_ADDRESS}/file/menu.categories.web.json`;
 
-    const categoriesData = fs.readFileSync(roomFilePath);
-    const categoriesDetail = JSON.parse(categoriesData);
+const fetchFromFile = () =>
+  new Promise((resolve, reject) => {
+    try {
+      const categoriesData = fs.readFileSync(roomFilePath);
+      const categoriesDetail = JSON.parse(categoriesData);
 
-    resolve(categoriesDetail);
-  } catch (error) {
-    reject(error);
-  }
-});
+      resolve(categoriesDetail);
+    } catch (error) {
+      reject(error);
+    }
+  });
 
-const fetchFromEnvironment = (env) => new Promise((resolve, reject) => {
-  try {
-    const categoriesData = env.categories_DATA;
-    const categoriesDetail = JSON.parse(categoriesData);
-    resolve(categoriesDetail);
-  } catch (error) {
-    reject(error);
-  }
-});
+const fetchFromEnvironment = (env) =>
+  new Promise((resolve, reject) => {
+    try {
+      const categoriesData = env.categories_DATA;
+      const categoriesDetail = JSON.parse(categoriesData);
+      resolve(categoriesDetail);
+    } catch (error) {
+      reject(error);
+    }
+  });
 
 const fetchFromRemote = (env) => {
   const url = env.categories_DATA;
 
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     request(url, (error, response, body) => {
       // in addition to parsing the value, deal with possible errors
       if (error) return reject(error);
@@ -39,7 +43,7 @@ const fetchFromRemote = (env) => {
         reject(e);
       }
     });
-  }));
+  });
 };
 
 const fetchcategories = (strategy) => {
