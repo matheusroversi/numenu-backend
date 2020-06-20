@@ -24,7 +24,7 @@ const routes = {
   listProductsPath: "/products",
   loginStrategyPath: `/auth/${_auth.authStrategy}`,
   loginStrategyCallbackPath: `/auth/${_auth.authStrategy}/callback`,
-  homePath: "https://localhost:3003/"
+  homePath: `${process.env.PUBLIC_URL}`
 };
 router.get(routes.loginPath, (req, res) => {
   if ((0, _auth.isUserLoggedIn)(req)) {

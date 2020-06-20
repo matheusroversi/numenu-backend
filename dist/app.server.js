@@ -28,7 +28,8 @@ var _app2 = require("./app.config");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const app = (0, _express.default)(); //app.use(morgan("tiny"));
+const app = (0, _express.default)();
+const PUBLIC_URL = process.env.PUBLIC_URL || "https://localhost:3003"; //app.use(morgan("tiny"));
 
 app.use((0, _cookieSession.default)((0, _app2.getSessionConfig)()));
 app.use(_bodyParser.default.urlencoded({
@@ -40,12 +41,12 @@ app.set("views", "./app/views"); // use authentication
 
 (0, _auth.setupAppAuth)(app);
 app.use((0, _cors.default)({
-  origin: ["https://localhost:3003"],
+  origin: [`${PUBLIC_URL}`],
   credentials: true
 }));
-app.use("/", _express.default.static(_path.default.join(__dirname, "..", "..", "public")));
+app.use("/", _express.default.static(_path.default.join(__dirname, "..", "dist")));
 
-const assetsManifestFile = _path.default.join(__dirname, "..", "..", "public", "dist", "manifest.json");
+const assetsManifestFile = _path.default.join(__dirname, "..", "dist", "manifest.json");
 
 const assetsManifestResolver = (0, _app2.getEnvironment)() === "production" ? _assets.default.staticManifestResolver(assetsManifestFile) : _assets.default.lazyManifestResolver(assetsManifestFile);
 app.locals.assets = _assets.default.createAssetsResolver(assetsManifestResolver, "/dist");
