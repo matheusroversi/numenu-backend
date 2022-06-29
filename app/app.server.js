@@ -24,7 +24,7 @@ import {
 
 const app = express();
 
-const PUBLIC_URL = process.env.PUBLIC_URL || "http://localhost:3000";
+const PUBLIC_URL = process.env.PUBLIC_URL || "https://localhost:3003";
 
 //app.use(morgan("tiny"));
 app.use(cookieSession(getSessionConfig()));
